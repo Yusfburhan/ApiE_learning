@@ -24,6 +24,10 @@ class User extends Authenticatable
         'password',
         'image',
         'role',
+        'category1' ,
+        'category2',
+        'category3',
+        'work',
 
     ];
    
@@ -48,10 +52,16 @@ class User extends Authenticatable
     ];
     public function enrollments()
     {
-        return $this->hasMany(Enrollments::class);
+        return $this->hasMany(Enrollment::class);
     }
-    
-
+    public function certificates()
+    {
+        return $this->hasMany(Certificate::class, 'teacher_id');
+    }
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
 
     // public function getCreatedAtAttribute($date)
     // {
@@ -63,9 +73,6 @@ class User extends Authenticatable
     //     return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
     // }
 
-    public function courses()
-    {
-        return $this->hasMany(Course::class);
-    }
+    
     
 }
